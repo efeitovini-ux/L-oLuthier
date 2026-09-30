@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-papel font-sans text-tinta antialiased;
+  }
+
+  /* Latão queimado dá 5,13:1 sobre o papel — passa como texto e serve de
+     anel de foco sem sair da paleta. */
+  :focus-visible {
+    outline: 2px solid theme('colors.latao');
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    @apply bg-latao/20;
+  }
+}
+
+/*
+ * Sangria: a mídia vai até a borda da tela, o texto continua alinhado à
+ * coluna de 72rem. Nada de foto em caixinha no meio do papel.
+ *
+ * Fora de @layer de propósito — mesma lição do projeto: o que é montado por
+ * template de classe some do CSS de produção quando fica dentro da layer.
+ */
+.coluna-esq {
+  padding-left: max(1.25rem, calc((100vw - 72rem) / 2));
+}
+
+.coluna-dir {
+  padding-right: max(1.25rem, calc((100vw - 72rem) / 2));
+}
+
+@media (min-width: 640px) {
+  .coluna-esq {
+    padding-left: max(2rem, calc((100vw - 72rem) / 2));
+  }
+
+  .coluna-dir {
+    padding-right: max(2rem, calc((100vw - 72rem) / 2));
+  }
+}
